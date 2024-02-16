@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 interface AppProps {
-  // Add any prop types necessary for App
 }
 
 function App({ /* props */ }: AppProps) {
@@ -26,10 +25,7 @@ function App({ /* props */ }: AppProps) {
 
         <div className="content">
           <Routes>
-            {/* ALL COUNTRIES PAGE */}
             <Route path="/" element={<AllCountries goHome={goHome} />} />
-
-            {/* COUNTRY DETAIL PAGE */}
             <Route path="/:countryName" element={<CountryDetail />} />
           </Routes>
         </div>
