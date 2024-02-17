@@ -10,8 +10,7 @@ interface AppProps {
 function App({ /* props */ }: AppProps) {
   const appRef = useRef<HTMLDivElement>(null);
 
-  // State for home button (the left side of header), so that AllCountries component can track the state
-  // for useEffect dependency
+ 
   const [goHome, setGoHome] = useState(0);
 
   return (
@@ -20,7 +19,6 @@ function App({ /* props */ }: AppProps) {
         ref={appRef}
         className="App dark-mode font-primary-font min-h-screen w-full bg-main-background text-main-color-text"
       >
-        {/* HEADER COMPONENT */}
         <Header appRef={appRef} setGoHome={setGoHome} goHome={goHome} />
 
         <div className="content">
