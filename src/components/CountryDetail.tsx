@@ -6,7 +6,7 @@ import useCountriesStore from "../store/countriesStore";
 function CountryDetail() {
   const { countryName } = useParams<{ countryName: string }>();
 
-  const { getSingleCountry, countries, isLoading, error } = useCountriesStore();
+  const { getSingleCountry, countries, isLoading, error }: any = useCountriesStore();
 
   const getCountryByName = async () => {
     getSingleCountry(countryName);

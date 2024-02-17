@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import useCountriesStore from "../store/countriesStore";
+import { FaSearch } from "react-icons/fa";
+
 
 const regions = [
   { value: 'Africa', label: 'Africa' },
@@ -11,13 +13,13 @@ const regions = [
 ];
 
 
-function AllCountries({ goHome }: { goHome: boolean }) {
+function AllCountries({ goHome }: { goHome: number }) {
 
 
   const searchBar = useRef<HTMLInputElement>(null);
   const selectBar = useRef<HTMLSelectElement>(null);
 
-  const { getAllCountries,countries, searchCountries,filterCountries, isLoading, error, resetLoadingAndError } = useCountriesStore();
+  const { getAllCountries,countries, searchCountries,filterCountries, isLoading, error, resetLoadingAndError} : any = useCountriesStore();
 
 
 useEffect(() => {
@@ -26,14 +28,14 @@ useEffect(() => {
 
 
 
-const searchCountry = async (e: React.FormEvent<HTMLFormElement>) => {
+const searchCountry = async (e: any) => {
   e.preventDefault();
   const query = searchBar.current!.value;
   searchCountries(query);
 };
 
 const filterCountriesByRegion = async () => {
-  const region = selectBar.current!.value as Region;
+  const region = selectBar.current!.value ;
   filterCountries(region);
 };
 
@@ -49,10 +51,12 @@ const filterCountriesByRegion = async () => {
         {/* ====== Search country ======= */}
         <div className="searchbar mb-6 lg:w-[400px]">
           <form onSubmit={searchCountry} className="relative ">
-            <i
-              onClick={searchCountry}
-              className="fa-solid fa-magnifying-glass absolute p-1 left-[12px] bottom-[12px] cursor-pointer"
-            />
+           
+            <FaSearch
+            size='18px'
+              onClick={searchCountries}
+              className=" absolute p-2 left-[12px] bottom-[12px] cursor-pointer" />
+
             <input
               ref={searchBar}
               type="text"

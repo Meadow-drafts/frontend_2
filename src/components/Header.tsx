@@ -10,15 +10,14 @@ interface AppRef {
 
 interface HeaderProps {
   appRef: AppRef;
-  goHome: boolean;
-  setGoHome: React.Dispatch<React.SetStateAction<boolean>>;
+  goHome: number;
+  setGoHome: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function Header({ appRef, goHome, setGoHome }: HeaderProps) {
   const iconMoonFull = useRef<HTMLSpanElement>(null);
   const iconMoonHollow = useRef<HTMLSpanElement>(null);
 
-  // Toggle light and dark theme
   function changeTheme() {
     iconMoonFull.current?.classList.toggle("hidden");
     iconMoonHollow.current?.classList.toggle("hidden");
@@ -26,7 +25,6 @@ function Header({ appRef, goHome, setGoHome }: HeaderProps) {
   }
   
 
-  // Update goHome state so that it can trigger useEffect() in AllCountries component
   function getHome() {
     setGoHome((prevGoHome) => prevGoHome + 1);
   }
