@@ -1,17 +1,24 @@
 import {create} from 'zustand';
 
+
+
 interface Country {
-  flags: { png: string };
-  name: { common: string };
-  region: string;
-  capital: string;
-  population: number;
-}
+    flags: { png: string };
+    name: { common: string };
+    region: string;
+    capital?: string; // Optional property
+    subregion?: string; // Optional property
+    population: number;
+    tld?: string[];
+    currencies?: { [key: string]: string };
+    languages?: { [key: string]: string };
+  }
 
 type Region = 'none' | 'Africa' | 'America' | 'Asia' | 'Europe' | 'Oceania';
 
 const useCountriesStore = create((set) => ({
   countries: [] as Country[],
+//   country: {} as Country,
   isLoading: true,
   error: '',
   searchQuery: '',
@@ -29,6 +36,21 @@ const useCountriesStore = create((set) => ({
       set({ countries: data, isLoading: false, error: '' });
     } catch (err: any) {
       set({ isLoading: false, error: err.message });
+    }
+  },
+
+  getSingleCountry : async (countryName: string) => {
+    try {
+      const res = await fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`);
+      if (!res.ok) throw new Error("Something went wrong");
+
+      const data = await res.json();
+      console.log({data})
+      set({ countries: data, isLoading: false, error: '' });
+
+    } catch (err: any) {
+            set({ isLoading: false, error: err.message });
+
     }
   },
 
